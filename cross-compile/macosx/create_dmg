@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 ##
 ## This file is part of the sigrok-util project.
 ##
@@ -35,7 +35,7 @@ fi
 BUILDDIR=./build_app_$APPNAME_BINARY
 
 # We use Qt 5.5 in order to remain compatible with more versions of Mac OS X.
-QTVER=qt@5.5
+QTVER=qt5
 
 # Path to Qt5 binaries.
 QTBINDIR=`brew list $QTVER | grep bin | head -n 1 | xargs dirname`
@@ -45,9 +45,9 @@ QTTRANSLATIONSDIR=`brew --prefix $QTVER`/translations
 BOOSTLIBDIR=`brew list boost | grep libboost_system | grep -v cmake | head -n 1 | xargs dirname`
 
 # Path to Python 3 framework.
-PYTHONFRAMEWORKDIR=`brew list python3 | grep libpython | head -n 1 | xargs dirname`/../../../..
+PYTHONFRAMEWORKDIR=`brew list python3 | grep libpython | head -n 1 | xargs dirname`/../../../../../../
 
-PYVER="3.7"
+PYVER="3.8"
 
 # You usually don't need to change anything below this line.
 
@@ -92,6 +92,7 @@ $QTBINDIR/macdeployqt $APPNAME.app
 
 # Copy Python framework and fix it up.
 cp -R $PYTHONFRAMEWORKDIR $FRAMEWORKSDIR
+
 chmod 644 $PYDIR/lib/libpython*.dylib
 rm -rf $PYDIR/Headers
 rm -rf $PYDIR/bin

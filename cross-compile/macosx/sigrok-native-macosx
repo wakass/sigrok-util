@@ -45,7 +45,7 @@ export CC=gcc
 export CXX=g++
 
 # We use Qt 5.5 in order to remain compatible with more versions of Mac OS X.
-QTVER=qt@5.5
+QTVER=qt5
 
 # Path to Qt5 binaries (needed for cmake to find the Qt5 libs).
 export PATH="$(brew --prefix $QTVER)/bin:$PATH"
@@ -72,6 +72,7 @@ cd $BUILDDIR
 GIT_CLONE="git clone --depth=1"
 
 REPO_BASE="git://sigrok.org"
+REPO_BASE_ISDS="https://github.com/wakass"
 
 # -----------------------------------------------------------------------------
 
@@ -88,7 +89,7 @@ cd ../..
 
 # libsigrok
 mkdir -p $PYPATH
-$GIT_CLONE $REPO_BASE/libsigrok
+$GIT_CLONE $REPO_BASE_ISDS/libsigrok
 cd libsigrok
 ./autogen.sh
 mkdir build
@@ -123,7 +124,7 @@ make install $V
 cd ../..
 
 # sigrok-firmware-fx2lafw
-$GIT_CLONE $REPO_BASE/sigrok-firmware-fx2lafw
+$GIT_CLONE $REPO_BASE_ISDS/sigrok-firmware-fx2lafw
 cd sigrok-firmware-fx2lafw
 ./autogen.sh
 mkdir build
